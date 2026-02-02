@@ -49,19 +49,19 @@ main {
   display: grid;
   grid-template-columns: minmax(220px, var(--nav-width)) 1fr;
   gap: 32px;
-  padding: 28px 40px 64px;
+  padding: 28px 32px 64px;
 }
 
 .home-shell {
   display: flex;
   justify-content: center;
-  padding: 28px 40px 64px;
+  padding: 28px 32px 64px;
 }
 
 .single-shell {
   position: relative;
   min-height: 100vh;
-  padding: 28px 40px 28px;
+  padding: 28px 32px 28px;
 }
 
 .single-nav .nav-group {
@@ -326,7 +326,7 @@ main {
 .nav {
   position: fixed;
   top: 28px;
-  left: 40px;
+  left: 32px;
   width: var(--nav-width);
   background: var(--surface);
   border-radius: 18px;

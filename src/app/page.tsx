@@ -689,6 +689,7 @@ export default function HomePage() {
   const [connectorPath, setConnectorPath] = useState<string>('');
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxSvg, setLightboxSvg] = useState<string | null>(null);
+  const [mobilePanel, setMobilePanel] = useState<'projects' | 'dossiers' | 'links' | null>(null);
   const handleImageClick = (src: string) => {
     setLightboxSvg(null);
     setLightboxSrc(src);
@@ -1142,6 +1143,131 @@ flowchart TB
         ) : null}
       </aside>
       <div className="doc-content">{activeSection.content}</div>
+      <nav className="mobile-nav" aria-label="Primary">
+        <button
+          type="button"
+          className={activeProject === 'main' ? 'active' : ''}
+          onClick={() => {
+            handleProjectSelect('main');
+            setMobilePanel(null);
+          }}
+        >
+          About
+        </button>
+        <button
+          type="button"
+          className={mobilePanel === 'projects' ? 'active' : ''}
+          onClick={() => setMobilePanel(mobilePanel === 'projects' ? null : 'projects')}
+        >
+          Projects
+        </button>
+        <button
+          type="button"
+          className={mobilePanel === 'dossiers' ? 'active' : ''}
+          onClick={() => setMobilePanel(mobilePanel === 'dossiers' ? null : 'dossiers')}
+        >
+          Dossier
+        </button>
+        <button
+          type="button"
+          className={mobilePanel === 'links' ? 'active' : ''}
+          onClick={() => setMobilePanel(mobilePanel === 'links' ? null : 'links')}
+        >
+          Links
+        </button>
+      </nav>
+      {mobilePanel ? (
+        <div
+          className="mobile-sheet"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setMobilePanel(null)}
+        >
+          <div className="mobile-sheet-card" onClick={(event) => event.stopPropagation()}>
+            <div className="mobile-sheet-handle" aria-hidden="true" />
+            <div className="mobile-sheet-header">
+              <strong>
+                {mobilePanel === 'projects'
+                  ? 'Projects'
+                  : mobilePanel === 'dossiers'
+                  ? 'HVACOps.ai Dossier'
+                  : 'Find Me'}
+              </strong>
+              <button type="button" onClick={() => setMobilePanel(null)}>
+                Close
+              </button>
+            </div>
+            {mobilePanel === 'projects' ? (
+              <div className="mobile-sheet-list">
+                {uiProjects.map((project) => (
+                  <button
+                    key={project.id}
+                    type="button"
+                    className={activeProject === project.id ? 'active' : ''}
+                    onClick={() => {
+                      handleProjectSelect(project.id);
+                      setMobilePanel(null);
+                    }}
+                  >
+                    {project.label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+            {mobilePanel === 'dossiers' ? (
+              <div className="mobile-sheet-list">
+                {projects.map((project) => (
+                  <button
+                    key={project.id}
+                    type="button"
+                    className={activeProject === project.id ? 'active' : ''}
+                    onClick={() => {
+                      handleProjectSelect(project.id);
+                      setMobilePanel(null);
+                    }}
+                  >
+                    {project.label}
+                  </button>
+                ))}
+                {activeProject === 'hvacops' ? (
+                  <div className="mobile-sheet-sublist">
+                    {activeSections.map((section) => (
+                      <button
+                        key={section.id}
+                        type="button"
+                        className={activeId === section.id ? 'active' : ''}
+                        onClick={() => {
+                          handleSelect(section.id);
+                          setMobilePanel(null);
+                        }}
+                      >
+                        {section.label}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+            {mobilePanel === 'links' ? (
+              <div className="mobile-sheet-list">
+                <a
+                  href="https://www.linkedin.com/in/nateinsupport/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
+                <a href="https://github.com/schradermade" target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+                <a href="https://postman.com/nateinsupport" target="_blank" rel="noreferrer">
+                  Postman
+                </a>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
       {lightboxSrc || lightboxSvg ? (
         <div
           className="lightbox"

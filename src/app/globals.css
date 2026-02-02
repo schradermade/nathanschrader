@@ -42,6 +42,8 @@ body {
   line-height: 1.6;
   min-height: 100%;
   min-height: 100svh;
+  height: -webkit-fill-available;
+  overflow-x: hidden;
 }
 
 a {
@@ -52,6 +54,7 @@ a {
 main {
   min-height: 100%;
   min-height: 100svh;
+  min-height: -webkit-fill-available;
 }
 
 .docs-shell {
@@ -71,6 +74,7 @@ main {
   position: relative;
   min-height: 100%;
   min-height: 100svh;
+  min-height: -webkit-fill-available;
   padding: var(--shell-pad-top) var(--shell-pad-x) 28px;
   display: grid;
   grid-template-columns: minmax(var(--nav-min-width), var(--nav-width)) 1fr;
@@ -320,6 +324,14 @@ main {
   border: 1px solid var(--border);
 }
 
+.mobile-nav {
+  display: none;
+}
+
+.mobile-sheet {
+  display: none;
+}
+
 @media (max-width: 980px) {
   :root {
     --shell-pad-x: 20px;
@@ -341,6 +353,8 @@ main {
   .single-shell {
     height: auto;
     padding: var(--shell-pad-top) var(--shell-pad-x) 56px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .nav {
@@ -353,6 +367,126 @@ main {
     width: auto;
     height: auto;
     overflow: visible;
+  }
+
+  .single-shell .nav {
+    position: static;
+    max-width: none;
+    width: 100%;
+  }
+
+  .single-shell .doc-content {
+    width: 100%;
+  }
+
+  .single-shell .nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    position: fixed;
+    left: var(--shell-pad-x);
+    right: var(--shell-pad-x);
+    bottom: 12px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    z-index: 5;
+  }
+
+  .mobile-nav button {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 8px 6px;
+    border-radius: 12px;
+  }
+
+  .mobile-nav button.active {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+
+  .mobile-sheet {
+    display: grid;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    align-items: end;
+    z-index: 12;
+  }
+
+  .mobile-sheet-card {
+    background: var(--surface);
+    border-radius: 20px 20px 0 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 -24px 60px rgba(15, 23, 42, 0.25);
+    padding: 12px 16px 24px;
+    max-height: 70vh;
+    overflow: auto;
+  }
+
+  .mobile-sheet-handle {
+    width: 48px;
+    height: 5px;
+    border-radius: 999px;
+    background: #d1d5db;
+    margin: 4px auto 10px;
+  }
+
+  .mobile-sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .mobile-sheet-header button {
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: var(--accent-strong);
+  }
+
+  .mobile-sheet-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .mobile-sheet-list a,
+  .mobile-sheet-list button {
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 14px;
+    text-align: left;
+    color: var(--ink);
+  }
+
+  .mobile-sheet-list button.active {
+    background: var(--accent-soft);
+    border-color: #99f6e4;
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+
+  .mobile-sheet-sublist {
+    display: grid;
+    gap: 8px;
+    padding-left: 8px;
+  }
+
+  .single-shell {
+    padding-bottom: 96px;
   }
 
   .home-header h1 {
@@ -463,6 +597,8 @@ main {
   height: auto;
   overflow: visible;
   margin-bottom: 48px;
+  max-width: 100%;
+  overflow-wrap: normal;
 }
 
 .single-shell .doc-content {
@@ -483,14 +619,30 @@ main {
 @media (max-width: 980px) {
   .doc-content {
     padding: 28px 24px 48px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .doc-content {
+    padding: 20px 16px 40px;
+    border-radius: 18px;
+  }
+
+  .mobile-nav {
+    left: 12px;
+    right: 12px;
   }
 }
 
 .doc-title {
   font-family: var(--font-serif);
-  font-size: 40px;
+  font-size: clamp(28px, 6vw, 40px);
   margin: 0;
   line-height: 1.1;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .doc-subtitle {
@@ -508,6 +660,16 @@ main {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px 14px;
+}
+
+.doc-content p,
+.doc-content li,
+.doc-content a,
+.doc-content h1,
+.doc-content h2,
+.doc-content h3,
+.doc-content h4 {
+  overflow-wrap: anywhere;
 }
 
 .profile-role {

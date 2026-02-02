@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   description: 'Applied AI, systems architecture, and field-grade reliability work.',
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sans.variable} ${serif.variable}`}>

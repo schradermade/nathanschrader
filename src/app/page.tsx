@@ -1026,6 +1026,8 @@ flowchart TB
       document.body.style.top = '';
       document.documentElement.style.overflow = '';
       document.documentElement.style.height = '';
+      document.body.classList.remove('lightbox-open');
+      document.documentElement.classList.remove('lightbox-open');
       window.scrollTo(0, scrollYRef.current);
       return;
     }
@@ -1036,6 +1038,12 @@ flowchart TB
     document.body.style.top = `-${scrollYRef.current}px`;
     document.documentElement.style.overflow = 'hidden';
     document.documentElement.style.height = '100%';
+    document.body.classList.add('lightbox-open');
+    document.documentElement.classList.add('lightbox-open');
+    const preventTouch = (event: TouchEvent) => {
+      event.preventDefault();
+    };
+    document.addEventListener('touchmove', preventTouch, { passive: false });
     return () => {
       document.body.style.overflow = '';
       document.body.style.position = '';
@@ -1043,6 +1051,9 @@ flowchart TB
       document.body.style.top = '';
       document.documentElement.style.overflow = '';
       document.documentElement.style.height = '';
+      document.body.classList.remove('lightbox-open');
+      document.documentElement.classList.remove('lightbox-open');
+      document.removeEventListener('touchmove', preventTouch);
       window.scrollTo(0, scrollYRef.current);
     };
   }, [lightboxSrc, lightboxSvg]);

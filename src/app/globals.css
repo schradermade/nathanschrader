@@ -441,9 +441,32 @@ main {
 }
 
 .profile-role {
-  color: var(--muted);
-  font-size: 15px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
   margin: 0 0 10px;
+}
+
+.profile-role-title {
+  letter-spacing: 0.01em;
+}
+
+.profile-role-sep {
+  color: color-mix(in srgb, var(--text) 65%, var(--muted));
+  font-weight: 500;
+}
+
+.profile-role-company {
+  color: color-mix(in srgb, var(--text) 80%, var(--muted));
+  font-weight: 500;
+}
+
+.profile-role-meta {
+  color: color-mix(in srgb, var(--muted) 85%, var(--text));
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .profile-header {

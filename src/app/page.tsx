@@ -609,7 +609,19 @@ const projectSections: Record<string, Section[]> = {
           <div className="profile-header">
             <div>
               <h1 className="doc-title">Nathan Schrader</h1>
-              <div className="profile-role">Customer Success Engineer — FDE-aligned.</div>
+              <div className="profile-role">
+                <span className="profile-role-title">Founder</span>
+                <span className="profile-role-sep">, </span>
+                <span className="profile-role-company">HVACOps.ai</span>
+                <br />
+                <span className="profile-role-title">Customer Success Engineer</span>
+                <span className="profile-role-sep">, </span>
+                <span className="profile-role-company">Tealium</span>
+                <br />
+                <span className="profile-role-meta">
+                  AI Platforms, APIs, Customer-Embedded Engineering
+                </span>
+              </div>
             </div>
             <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
           </div>

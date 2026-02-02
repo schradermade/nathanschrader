@@ -22,7 +22,7 @@
   --page-max: 900px;
   --shell-pad-x: 32px;
   --shell-pad-top: 28px;
-  --shell-gap: 24px;
+  --shell-gap: var(--shell-pad-x);
 }
 
 * {
@@ -299,18 +299,24 @@ main {
 }
 
 @media (max-width: 980px) {
+  :root {
+    --shell-pad-x: 20px;
+    --shell-pad-top: 20px;
+    --shell-gap: var(--shell-pad-x);
+  }
+
   .docs-shell {
     grid-template-columns: 1fr;
-    padding: 20px 20px 56px;
+    padding: var(--shell-pad-top) var(--shell-pad-x) 56px;
   }
 
   .home-shell {
-    padding: 20px 20px 56px;
+    padding: var(--shell-pad-top) var(--shell-pad-x) 56px;
   }
 
   .single-shell {
     height: auto;
-    padding: 20px 20px 56px;
+    padding: var(--shell-pad-top) var(--shell-pad-x) 56px;
   }
 
   .nav {

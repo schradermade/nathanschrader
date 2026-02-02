@@ -488,6 +488,7 @@ main {
   font-family: var(--font-serif);
   font-size: 40px;
   margin: 0;
+  line-height: 1.1;
 }
 
 .doc-subtitle {

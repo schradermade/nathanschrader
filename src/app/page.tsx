@@ -12,7 +12,11 @@ type Section = {
   content: React.ReactNode;
 };
 
-const baseSections: Section[] = [
+const buildBaseSections = ({
+  onDiagramClick,
+}: {
+  onDiagramClick: (svg: string) => void;
+}): Section[] => [
   {
     id: 'cover',
     label: 'Cover',
@@ -279,10 +283,7 @@ flowchart TB
   Gateway --> Model[LLM Provider]
   Worker --> Logs[Analytics + Audit Logs]
 `}
-          onClick={(svg) => {
-            setLightboxSrc(null);
-            setLightboxSvg(svg);
-          }}
+          onClick={onDiagramClick}
         />
         <Callout variant="decision">
           Cloudflare-first architecture is chosen for global latency, integrated services, and
@@ -351,10 +352,7 @@ flowchart LR
   Post --> Output[Answer + Citations]
   Post --> Audit[Audit Log]
 `}
-          onClick={(svg) => {
-            setLightboxSrc(null);
-            setLightboxSvg(svg);
-          }}
+          onClick={onDiagramClick}
         />
         <h3>Structured Output Schema</h3>
         <ul>
@@ -466,10 +464,7 @@ flowchart LR
   API --> R2[(R2 Artifacts)]
   API --> LLM[AI Gateway]
 `}
-          onClick={(svg) => {
-            setLightboxSrc(null);
-            setLightboxSvg(svg);
-          }}
+          onClick={onDiagramClick}
         />
         <Callout variant="risk">
           The highest risk is cross-tenant leakage through retrieval or logging.
@@ -610,7 +605,13 @@ const uiProjects = [
   { id: 'audit-trading', label: 'AI Trading Audit Platform' },
 ];
 
-const projectSections: Record<string, Section[]> = {
+const buildProjectSections = ({
+  onImageClick,
+  onDiagramClick,
+}: {
+  onImageClick: (src: string) => void;
+  onDiagramClick: (svg: string) => void;
+}): Record<string, Section[]> => ({
   main: [
     {
       id: 'main',
@@ -635,14 +636,7 @@ const projectSections: Record<string, Section[]> = {
                 </span>
               </div>
             </div>
-            <button
-              type="button"
-              className="image-button"
-              onClick={() => {
-                setLightboxSvg(null);
-                setLightboxSrc('/headshot.png');
-              }}
-            >
+            <button type="button" className="image-button" onClick={() => onImageClick('/headshot.png')}>
               <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
             </button>
           </div>
@@ -686,8 +680,8 @@ const projectSections: Record<string, Section[]> = {
       ),
     },
   ],
-  hvacops: baseSections,
-};
+  hvacops: buildBaseSections({ onDiagramClick }),
+});
 
 export default function HomePage() {
   const [activeProject, setActiveProject] = useState<string>('main');
@@ -695,6 +689,18 @@ export default function HomePage() {
   const [connectorPath, setConnectorPath] = useState<string>('');
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxSvg, setLightboxSvg] = useState<string | null>(null);
+  const handleImageClick = (src: string) => {
+    setLightboxSvg(null);
+    setLightboxSrc(src);
+  };
+  const handleDiagramClick = (svg: string) => {
+    setLightboxSrc(null);
+    setLightboxSvg(svg);
+  };
+  const projectSections = buildProjectSections({
+    onImageClick: handleImageClick,
+    onDiagramClick: handleDiagramClick,
+  });
   const projectViews = useMemo<Record<string, Section[]>>(
     () => ({
       jarvis: [

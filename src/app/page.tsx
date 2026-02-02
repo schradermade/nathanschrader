@@ -907,7 +907,7 @@ flowchart TB
   );
   const navRef = useRef<HTMLDivElement | null>(null);
   const activeProjectRef = useRef<HTMLButtonElement | null>(null);
-  const activeLabelRef = useRef<HTMLDivElement | null>(null);
+  const activeLabelRef = useRef<HTMLButtonElement | null>(null);
 
   const activeSections = useMemo(() => {
     if (projectViews[activeProject]) return projectViews[activeProject];

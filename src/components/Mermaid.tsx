@@ -15,7 +15,13 @@ mermaid.initialize({
   },
 });
 
-export function Mermaid({ chart }: { chart: string }) {
+export function Mermaid({
+  chart,
+  onClick,
+}: {
+  chart: string;
+  onClick?: (svg: string) => void;
+}) {
   const [svg, setSvg] = useState('');
   const id = useId().replace(/:/g, '');
 
@@ -33,6 +39,20 @@ export function Mermaid({ chart }: { chart: string }) {
       active = false;
     };
   }, [chart, id]);
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        className="mermaid-card is-clickable"
+        onClick={() => onClick(svg)}
+        aria-label="Open diagram"
+      >
+        <span className="sr-only">Open diagram</span>
+        <span className="mermaid-body" dangerouslySetInnerHTML={{ __html: svg }} />
+      </button>
+    );
+  }
 
   return <div className="mermaid-card" dangerouslySetInnerHTML={{ __html: svg }} />;
 }

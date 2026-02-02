@@ -279,6 +279,10 @@ flowchart TB
   Gateway --> Model[LLM Provider]
   Worker --> Logs[Analytics + Audit Logs]
 `}
+          onClick={(svg) => {
+            setLightboxSrc(null);
+            setLightboxSvg(svg);
+          }}
         />
         <Callout variant="decision">
           Cloudflare-first architecture is chosen for global latency, integrated services, and
@@ -347,6 +351,10 @@ flowchart LR
   Post --> Output[Answer + Citations]
   Post --> Audit[Audit Log]
 `}
+          onClick={(svg) => {
+            setLightboxSrc(null);
+            setLightboxSvg(svg);
+          }}
         />
         <h3>Structured Output Schema</h3>
         <ul>
@@ -458,6 +466,10 @@ flowchart LR
   API --> R2[(R2 Artifacts)]
   API --> LLM[AI Gateway]
 `}
+          onClick={(svg) => {
+            setLightboxSrc(null);
+            setLightboxSvg(svg);
+          }}
         />
         <Callout variant="risk">
           The highest risk is cross-tenant leakage through retrieval or logging.
@@ -623,7 +635,16 @@ const projectSections: Record<string, Section[]> = {
                 </span>
               </div>
             </div>
-            <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
+            <button
+              type="button"
+              className="image-button"
+              onClick={() => {
+                setLightboxSvg(null);
+                setLightboxSrc('/headshot.png');
+              }}
+            >
+              <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
+            </button>
           </div>
           <TLDR
             items={[
@@ -673,6 +694,7 @@ export default function HomePage() {
   const [activeId, setActiveId] = useState<string>('main');
   const [connectorPath, setConnectorPath] = useState<string>('');
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxSvg, setLightboxSvg] = useState<string | null>(null);
   const projectViews = useMemo<Record<string, Section[]>>(
     () => ({
       jarvis: [
@@ -709,7 +731,10 @@ export default function HomePage() {
                 <button
                   type="button"
                   className="image-button"
-                  onClick={() => setLightboxSrc('/jarvis-1.png')}
+                  onClick={() => {
+                    setLightboxSvg(null);
+                    setLightboxSrc('/jarvis-1.png');
+                  }}
                 >
                   <img src="/jarvis-1.png" alt="Jarvis side panel view with logger tools." />
                 </button>
@@ -719,7 +744,10 @@ export default function HomePage() {
                 <button
                   type="button"
                   className="image-button"
-                  onClick={() => setLightboxSrc('/jarvis-2.png')}
+                  onClick={() => {
+                    setLightboxSvg(null);
+                    setLightboxSrc('/jarvis-2.png');
+                  }}
                 >
                   <img src="/jarvis-2.png" alt="Jarvis export and preview workflow." />
                 </button>
@@ -778,7 +806,10 @@ export default function HomePage() {
                   <button
                     type="button"
                     className="image-button"
-                    onClick={() => setLightboxSrc('/hotspotti-1.jpeg')}
+                    onClick={() => {
+                      setLightboxSvg(null);
+                      setLightboxSrc('/hotspotti-1.jpeg');
+                    }}
                   >
                     <img src="/hotspotti-1.jpeg" alt="Hotspotti app screen overview." />
                   </button>
@@ -788,7 +819,10 @@ export default function HomePage() {
                   <button
                     type="button"
                     className="image-button"
-                    onClick={() => setLightboxSrc('/hotspotti-2.jpeg')}
+                    onClick={() => {
+                      setLightboxSvg(null);
+                      setLightboxSrc('/hotspotti-2.jpeg');
+                    }}
                   >
                     <img src="/hotspotti-2.jpeg" alt="Hotspotti app detail view." />
                   </button>
@@ -798,7 +832,10 @@ export default function HomePage() {
                   <button
                     type="button"
                     className="image-button"
-                    onClick={() => setLightboxSrc('/hotspotti-3.jpeg')}
+                    onClick={() => {
+                      setLightboxSvg(null);
+                      setLightboxSrc('/hotspotti-3.jpeg');
+                    }}
                   >
                     <img src="/hotspotti-3.jpeg" alt="Hotspotti profile and favorites." />
                   </button>
@@ -865,6 +902,10 @@ flowchart LR
   Audit --> DB[(Audit DB - SQLite)]
   Orchestrator --> Response[Decision Response]
 `}
+                onClick={(svg) => {
+                  setLightboxSrc(null);
+                  setLightboxSvg(svg);
+                }}
               />
               <h3>Audit flow</h3>
               <Mermaid
@@ -879,6 +920,10 @@ sequenceDiagram
   O->>A: audit: decision_forwarded
   O-->>C: recommendation response
 `}
+                onClick={(svg) => {
+                  setLightboxSrc(null);
+                  setLightboxSvg(svg);
+                }}
               />
               <h3>Trust boundary</h3>
               <Mermaid
@@ -896,6 +941,10 @@ flowchart TB
   O --> L
   L --> O
 `}
+                onClick={(svg) => {
+                  setLightboxSrc(null);
+                  setLightboxSvg(svg);
+                }}
               />
               <h3>Key capabilities</h3>
               <ul>
@@ -915,7 +964,7 @@ flowchart TB
         },
       ],
     }),
-    [setLightboxSrc]
+    [setLightboxSrc, setLightboxSvg]
   );
   const navRef = useRef<HTMLDivElement | null>(null);
   const activeProjectRef = useRef<HTMLButtonElement | null>(null);
@@ -1087,21 +1136,34 @@ flowchart TB
         ) : null}
       </aside>
       <div className="doc-content">{activeSection.content}</div>
-      {lightboxSrc ? (
+      {lightboxSrc || lightboxSvg ? (
         <div
           className="lightbox"
           role="dialog"
           aria-modal="true"
-          onClick={() => setLightboxSrc(null)}
+          onClick={() => {
+            setLightboxSrc(null);
+            setLightboxSvg(null);
+          }}
         >
           <button
             type="button"
             className="lightbox-close"
-            onClick={() => setLightboxSrc(null)}
+            onClick={() => {
+              setLightboxSrc(null);
+              setLightboxSvg(null);
+            }}
           >
             Close
           </button>
-          <img src={lightboxSrc} alt="Expanded view" />
+          {lightboxSrc ? (
+            <img src={lightboxSrc} alt="Expanded view" />
+          ) : (
+            <div
+              className="lightbox-svg"
+              dangerouslySetInnerHTML={{ __html: lightboxSvg ?? '' }}
+            />
+          )}
         </div>
       ) : null}
     </main>

@@ -694,6 +694,7 @@ export default function HomePage() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxSvg, setLightboxSvg] = useState<string | null>(null);
   const [mobilePanel, setMobilePanel] = useState<'projects' | 'dossiers' | 'links' | null>(null);
+  const scrollYRef = useRef(0);
   const handleImageClick = (src: string) => {
     setLightboxSvg(null);
     setLightboxSrc(src);
@@ -1020,14 +1021,29 @@ flowchart TB
   useEffect(() => {
     if (!lightboxSrc && !lightboxSvg) {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
       document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
+      window.scrollTo(0, scrollYRef.current);
       return;
     }
+    scrollYRef.current = window.scrollY || window.pageYOffset;
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = `-${scrollYRef.current}px`;
     document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100%';
     return () => {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
       document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
+      window.scrollTo(0, scrollYRef.current);
     };
   }, [lightboxSrc, lightboxSvg]);
 

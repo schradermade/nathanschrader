@@ -1017,6 +1017,20 @@ flowchart TB
     }
   }, []);
 
+  useEffect(() => {
+    if (!lightboxSrc && !lightboxSvg) {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      return;
+    }
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [lightboxSrc, lightboxSvg]);
+
   const handleSelect = (id: string) => {
     setActiveId(id);
     window.history.replaceState(null, '', `#${id}`);

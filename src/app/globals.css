@@ -23,6 +23,7 @@
   --shell-pad-x: 32px;
   --shell-pad-top: 28px;
   --shell-gap: var(--shell-pad-x);
+  --nav-width-compact: 210px;
 }
 
 * {
@@ -46,6 +47,7 @@ a {
 
 main {
   min-height: 100vh;
+  min-height: 100svh;
 }
 
 .docs-shell {
@@ -64,6 +66,7 @@ main {
 .single-shell {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   padding: var(--shell-pad-top) var(--shell-pad-x) 28px;
   display: grid;
   grid-template-columns: minmax(220px, var(--nav-width)) 1fr;
@@ -116,6 +119,9 @@ main {
   text-align: left;
   width: 100%;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .single-nav a:hover,
@@ -303,6 +309,7 @@ main {
     --shell-pad-x: 20px;
     --shell-pad-top: 20px;
     --shell-gap: var(--shell-pad-x);
+    --nav-width: var(--nav-width-compact);
   }
 
   .docs-shell {
@@ -416,6 +423,9 @@ main {
   border-radius: 10px;
   color: var(--muted);
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav a.active {

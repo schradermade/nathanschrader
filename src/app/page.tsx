@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { TLDR } from '@/components/TLDR';
 import { Callout } from '@/components/Callout';
 import { Mermaid } from '@/components/Mermaid';
@@ -1312,36 +1313,39 @@ flowchart TB
           </div>
         </div>
       ) : null}
-      {lightboxSrc || lightboxSvg ? (
-        <div
-          className="lightbox"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => {
-            setLightboxSrc(null);
-            setLightboxSvg(null);
-          }}
-        >
-          <button
-            type="button"
-            className="lightbox-close"
-            onClick={() => {
-              setLightboxSrc(null);
-              setLightboxSvg(null);
-            }}
-          >
-            Close
-          </button>
-          {lightboxSrc ? (
-            <img src={lightboxSrc} alt="Expanded view" />
-          ) : (
+      {lightboxSrc || lightboxSvg
+        ? createPortal(
             <div
-              className="lightbox-svg"
-              dangerouslySetInnerHTML={{ __html: lightboxSvg ?? '' }}
-            />
-          )}
-        </div>
-      ) : null}
+              className="lightbox"
+              role="dialog"
+              aria-modal="true"
+              onClick={() => {
+                setLightboxSrc(null);
+                setLightboxSvg(null);
+              }}
+            >
+              <button
+                type="button"
+                className="lightbox-close"
+                onClick={() => {
+                  setLightboxSrc(null);
+                  setLightboxSvg(null);
+                }}
+              >
+                Close
+              </button>
+              {lightboxSrc ? (
+                <img src={lightboxSrc} alt="Expanded view" />
+              ) : (
+                <div
+                  className="lightbox-svg"
+                  dangerouslySetInnerHTML={{ __html: lightboxSvg ?? '' }}
+                />
+              )}
+            </div>,
+            document.body
+          )
+        : null}
     </main>
   );
 }

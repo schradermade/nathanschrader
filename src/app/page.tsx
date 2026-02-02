@@ -1041,11 +1041,6 @@ flowchart TB
     document.documentElement.style.height = '100%';
     document.body.classList.add('lightbox-open');
     document.documentElement.classList.add('lightbox-open');
-    const preventScroll = (event: TouchEvent) => {
-      if (event.touches.length > 1) return;
-      event.preventDefault();
-    };
-    document.addEventListener('touchmove', preventScroll, { passive: false });
     return () => {
       document.body.style.overflow = '';
       document.body.style.position = '';
@@ -1055,7 +1050,6 @@ flowchart TB
       document.documentElement.style.height = '';
       document.body.classList.remove('lightbox-open');
       document.documentElement.classList.remove('lightbox-open');
-      document.removeEventListener('touchmove', preventScroll);
       window.scrollTo(0, scrollYRef.current);
     };
   }, [lightboxSrc, lightboxSvg]);
@@ -1220,7 +1214,7 @@ flowchart TB
           className={mobilePanel === 'links' ? 'active' : ''}
           onClick={() => setMobilePanel(mobilePanel === 'links' ? null : 'links')}
         >
-          Links
+          Find Me
         </button>
       </nav>
       {mobilePanel ? (

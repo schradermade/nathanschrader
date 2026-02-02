@@ -285,7 +285,7 @@ main {
   padding: 24px;
   z-index: 10;
   overscroll-behavior: contain;
-  touch-action: manipulation;
+  touch-action: none;
 }
 
 .lightbox img {
@@ -294,7 +294,6 @@ main {
   border-radius: 18px;
   border: 1px solid var(--border);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
-  touch-action: manipulation;
 }
 
 .lightbox-svg {
@@ -306,7 +305,6 @@ main {
   border: 1px solid var(--border);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
   padding: 16px;
-  touch-action: manipulation;
 }
 
 .lightbox-svg svg {

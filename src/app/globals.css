@@ -710,12 +710,40 @@ main {
 }
 
 .profile-avatar {
-  width: 140px;
-  height: 140px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+}
+
+.about-section {
+  position: relative;
+}
+
+.about-section .profile-avatar-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.profile-title-block {
+  padding-right: 0;
+}
+
+.profile-header .profile-role {
+  margin-top: 18px;
+  padding-right: 0;
+}
+
+.profile-name {
+  display: block;
+  padding-right: 140px;
 }
 
 .tldr {

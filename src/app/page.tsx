@@ -617,11 +617,18 @@ const buildProjectSections = ({
       id: 'main',
       label: 'Main',
       content: (
-        <section>
+        <section className="about-section">
           <span className="kicker">About</span>
           <div className="profile-header">
-            <div>
-              <h1 className="doc-title">Nathan Schrader</h1>
+            <button
+              type="button"
+              className="image-button profile-avatar-button"
+              onClick={() => onImageClick('/headshot.png')}
+            >
+              <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
+            </button>
+            <div className="profile-title-block">
+              <h1 className="doc-title profile-name">Nathan Schrader</h1>
               <div className="profile-role">
                 <span className="profile-role-title">Founder</span>
                 <span className="profile-role-sep">, </span>
@@ -636,9 +643,6 @@ const buildProjectSections = ({
                 </span>
               </div>
             </div>
-            <button type="button" className="image-button" onClick={() => onImageClick('/headshot.png')}>
-              <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
-            </button>
           </div>
           <TLDR
             items={[
@@ -1229,23 +1233,22 @@ flowchart TB
                     {project.label}
                   </button>
                 ))}
-                {activeProject === 'hvacops' ? (
-                  <div className="mobile-sheet-sublist">
-                    {activeSections.map((section) => (
-                      <button
-                        key={section.id}
-                        type="button"
-                        className={activeId === section.id ? 'active' : ''}
-                        onClick={() => {
-                          handleSelect(section.id);
-                          setMobilePanel(null);
-                        }}
-                      >
-                        {section.label}
-                      </button>
-                    ))}
-                  </div>
-                ) : null}
+                <div className="mobile-sheet-sublist">
+                  {(projectSections.hvacops ?? []).map((section) => (
+                    <button
+                      key={section.id}
+                      type="button"
+                      className={activeId === section.id ? 'active' : ''}
+                      onClick={() => {
+                        setActiveProject('hvacops');
+                        handleSelect(section.id);
+                        setMobilePanel(null);
+                      }}
+                    >
+                      {section.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             ) : null}
             {mobilePanel === 'links' ? (

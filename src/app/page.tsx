@@ -1227,7 +1227,6 @@ flowchart TB
                     className={activeProject === project.id ? 'active' : ''}
                     onClick={() => {
                       handleProjectSelect(project.id);
-                      setMobilePanel(null);
                     }}
                   >
                     {project.label}

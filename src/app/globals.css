@@ -20,6 +20,9 @@
   --shadow: 0 18px 40px rgba(21, 23, 20, 0.08);
   --nav-width: 250px;
   --page-max: 900px;
+  --shell-pad-x: 32px;
+  --shell-pad-top: 28px;
+  --shell-gap: 24px;
 }
 
 * {
@@ -48,23 +51,23 @@ main {
 .docs-shell {
   display: grid;
   grid-template-columns: minmax(220px, var(--nav-width)) 1fr;
-  gap: 32px;
-  padding: 28px 32px 64px;
+  gap: var(--shell-gap);
+  padding: var(--shell-pad-top) var(--shell-pad-x) 64px;
 }
 
 .home-shell {
   display: flex;
   justify-content: center;
-  padding: 28px 32px 64px;
+  padding: var(--shell-pad-top) var(--shell-pad-x) 64px;
 }
 
 .single-shell {
   position: relative;
   min-height: 100vh;
-  padding: 28px 32px 28px;
+  padding: var(--shell-pad-top) var(--shell-pad-x) 28px;
   display: grid;
   grid-template-columns: minmax(220px, var(--nav-width)) 1fr;
-  gap: 32px;
+  gap: var(--shell-gap);
   align-items: start;
 }
 
@@ -329,8 +332,8 @@ main {
 
 .nav {
   position: fixed;
-  top: 28px;
-  left: 32px;
+  top: var(--shell-pad-top);
+  left: var(--shell-pad-x);
   width: var(--nav-width);
   background: var(--surface);
   border-radius: 18px;
@@ -343,10 +346,12 @@ main {
 
 .single-shell .nav {
   position: sticky;
-  top: 28px;
+  top: var(--shell-pad-top);
   left: auto;
   width: auto;
   max-width: var(--nav-width);
+  margin-top: 0;
+  align-self: start;
 }
 
 .nav > * {
@@ -431,6 +436,8 @@ main {
   margin-left: 0;
   width: 100%;
   max-width: none;
+  margin-top: 0;
+  align-self: start;
 }
 
 .doc-back {

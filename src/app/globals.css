@@ -62,6 +62,10 @@ main {
   position: relative;
   min-height: 100vh;
   padding: 28px 32px 28px;
+  display: grid;
+  grid-template-columns: minmax(220px, var(--nav-width)) 1fr;
+  gap: 32px;
+  align-items: start;
 }
 
 .single-nav .nav-group {
@@ -337,6 +341,14 @@ main {
   position: fixed;
 }
 
+.single-shell .nav {
+  position: sticky;
+  top: 28px;
+  left: auto;
+  width: auto;
+  max-width: var(--nav-width);
+}
+
 .nav > * {
   position: relative;
   z-index: 1;
@@ -413,6 +425,12 @@ main {
   height: auto;
   overflow: visible;
   margin-bottom: 48px;
+}
+
+.single-shell .doc-content {
+  margin-left: 0;
+  width: 100%;
+  max-width: none;
 }
 
 .doc-back {

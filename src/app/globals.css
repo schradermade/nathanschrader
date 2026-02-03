@@ -742,6 +742,24 @@ main {
   box-shadow: var(--shadow);
 }
 
+@media (min-width: 901px) {
+  .profile-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .profile-name {
+    padding-right: 230px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .profile-avatar {
+    width: 200px;
+    height: 200px;
+  }
+}
+
 .about-section {
   position: relative;
 }

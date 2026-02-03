@@ -1,7 +1,99 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const RESUME_URL = "/Nathan_Schrader_Resume.pdf";
-const RESUME_VIEWER_URL = `${RESUME_URL}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`;
 
 export default function MyResumePage() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [status, setStatus] = useState<"idle" | "loading" | "ready" | "error">(
+    "idle"
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    let resizeObserver: ResizeObserver | null = null;
+
+    const renderPdf = async () => {
+      if (!containerRef.current) {
+        return;
+      }
+
+      setStatus("loading");
+
+      try {
+        const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf");
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+
+        const loadingTask = pdfjsLib.getDocument(RESUME_URL);
+        const pdf = await loadingTask.promise;
+
+        if (cancelled || !containerRef.current) {
+          return;
+        }
+
+        containerRef.current.innerHTML = "";
+
+        const renderPages = async () => {
+          if (!containerRef.current) {
+            return;
+          }
+
+          containerRef.current.innerHTML = "";
+          const containerWidth = containerRef.current.clientWidth;
+
+          for (let pageNum = 1; pageNum <= pdf.numPages; pageNum += 1) {
+            if (cancelled || !containerRef.current) {
+              return;
+            }
+
+            const page = await pdf.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1 });
+            const scale = containerWidth / viewport.width;
+            const scaledViewport = page.getViewport({ scale });
+
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            if (!context) {
+              continue;
+            }
+
+            canvas.width = Math.floor(scaledViewport.width);
+            canvas.height = Math.floor(scaledViewport.height);
+            canvas.className = "resume-page";
+
+            containerRef.current.appendChild(canvas);
+
+            await page.render({
+              canvasContext: context,
+              viewport: scaledViewport,
+            }).promise;
+          }
+        };
+
+        await renderPages();
+
+        resizeObserver = new ResizeObserver(() => {
+          renderPages();
+        });
+
+        resizeObserver.observe(containerRef.current);
+        setStatus("ready");
+      } catch (error) {
+        if (!cancelled) {
+          setStatus("error");
+        }
+      }
+    };
+
+    renderPdf();
+
+    return () => {
+      cancelled = true;
+      resizeObserver?.disconnect();
+    };
+  }, []);
+
   return (
     <main className="doc-content resume-content">
       <h1 className="doc-title">Resume</h1>
@@ -11,26 +103,25 @@ export default function MyResumePage() {
         </a>
       </p>
       <p className="resume-helper">
-        If the embed is limited on iPad, tap{" "}
+        Prefer the native viewer?{" "}
         <a href={RESUME_URL} target="_blank" rel="noreferrer">
           Open full PDF
         </a>
         .
       </p>
-      <object
-        title="Nathan Schrader Resume"
-        data={RESUME_VIEWER_URL}
-        type="application/pdf"
-        className="resume-frame"
-      >
-        <p>
-          Your browser can’t display the PDF inline.{" "}
-          <a href={RESUME_URL} target="_blank" rel="noreferrer">
-            Open full PDF
-          </a>
-          .
-        </p>
-      </object>
+      <div className="resume-viewer">
+        {status === "loading" && <p>Loading resume…</p>}
+        {status === "error" && (
+          <p>
+            The resume could not be displayed.{" "}
+            <a href={RESUME_URL} target="_blank" rel="noreferrer">
+              Open full PDF
+            </a>
+            .
+          </p>
+        )}
+        <div ref={containerRef} className="resume-pages" />
+      </div>
     </main>
   );
 }

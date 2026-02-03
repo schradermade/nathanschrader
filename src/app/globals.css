@@ -795,6 +795,19 @@ main {
   max-width: none;
 }
 
+.resume-frame {
+  width: 100%;
+  height: 90svh;
+  border: none;
+  background: #fff;
+}
+
+.resume-helper {
+  margin: 10px 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .tldr {
   border-radius: 18px;
   border: 1px solid var(--border);

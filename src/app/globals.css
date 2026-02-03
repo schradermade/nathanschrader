@@ -788,6 +788,13 @@ main {
   padding-right: 140px;
 }
 
+.resume-content {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  max-width: none;
+}
+
 .tldr {
   border-radius: 18px;
   border: 1px solid var(--border);

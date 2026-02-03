@@ -67,6 +67,7 @@ export default function MyResumePage() {
             await page.render({
               canvasContext: context,
               viewport: scaledViewport,
+              canvas,
             }).promise;
           }
         };

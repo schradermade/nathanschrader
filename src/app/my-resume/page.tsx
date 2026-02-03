@@ -1,4 +1,4 @@
-const RESUME_URL = "/Nathan_Schrader_resume.pdf";
+const RESUME_URL = "/Nathan_Schrader_Resume.pdf";
 
 export default function MyResumePage() {
   return (

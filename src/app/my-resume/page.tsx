@@ -23,11 +23,9 @@ export default function MyResumePage() {
 
       try {
         const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
-        const loadingTask = pdfjsLib.getDocument({
-          url: RESUME_URL,
-          disableWorker: true,
-        });
+        const loadingTask = pdfjsLib.getDocument(RESUME_URL);
         const pdf = await loadingTask.promise;
 
         if (cancelled || !containerRef.current) {

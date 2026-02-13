@@ -12,6 +12,7 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@next/mdx": "^14.2.5",
+    "@vercel/analytics": "^1.6.1",
     "mermaid": "^10.9.1",
     "next": "^14.2.5",
     "pdfjs-dist": "^5.4.624",

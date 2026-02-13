@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { IBM_Plex_Sans, Fraunces } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const sans = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -17,7 +18,8 @@ const serif = Fraunces({
 
 export const metadata: Metadata = {
   title: 'Nathan Schrader',
-  description: 'Applied AI, systems architecture, and field-grade reliability work.',
+  description:
+    'Applied AI, systems architecture, and field-grade reliability work.',
 };
 
 export const viewport = {
@@ -27,14 +29,23 @@ export const viewport = {
   userScalable: true,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const tealiumUtagUrl = 'https://tags.nathanschrader.com/main/prod/utag.js';
 
   return (
     <html lang="en" className={`${sans.variable} ${serif.variable}`}>
       <body>
-        <Script id="tealium-utag" strategy="afterInteractive" src={tealiumUtagUrl} />
+        <Script
+          id="tealium-utag"
+          strategy="afterInteractive"
+          src={tealiumUtagUrl}
+        />
         {children}
+        <Analytics />
       </body>
     </html>
   );

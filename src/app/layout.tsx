@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { IBM_Plex_Sans, Fraunces } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const sans = IBM_Plex_Sans({
@@ -27,9 +28,14 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const tealiumUtagUrl = 'https://tags.nathanschrader.com/main/prod/utag.js';
+
   return (
     <html lang="en" className={`${sans.variable} ${serif.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Script id="tealium-utag" strategy="afterInteractive" src={tealiumUtagUrl} />
+        {children}
+      </body>
     </html>
   );
 }

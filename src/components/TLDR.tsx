@@ -1,12 +1,14 @@
-export function TLDR({ items }: { items: string[] }) {
+export function TLDR({ items, className }: { items: string[]; className?: string }) {
+  const classes = className ? `tldr ${className}` : 'tldr';
   return (
-    <section className="tldr" aria-label="TLDR summary">
-      <h3>TL;DR</h3>
-      <ul>
+    <section className={classes} aria-label="TLDR summary">
+      <div className="tldr-items">
         {items.map((item) => (
-          <li key={item}>{item}</li>
+          <div key={item} className="tldr-item">
+            {item}
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

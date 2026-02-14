@@ -622,7 +622,6 @@ const buildProjectSections = ({
       label: 'Main',
       content: (
         <section className="about-section">
-          <span className="kicker">About</span>
           <div className="profile-header">
             <button
               type="button"
@@ -634,55 +633,71 @@ const buildProjectSections = ({
             <div className="profile-title-block">
               <h1 className="doc-title profile-name">Nathan Schrader</h1>
               <div className="profile-role">
-                <span className="profile-role-title">Founder</span>
-                <span className="profile-role-sep">, </span>
-                <span className="profile-role-company">HVACOps.ai</span>
-                <br />
-                <span className="profile-role-title">Customer Success Engineer</span>
-                <span className="profile-role-sep">, </span>
-                <span className="profile-role-company">Tealium</span>
-                <br />
-                <span className="profile-role-meta">
-                  AI Platforms, APIs, Customer-Embedded Engineering
-                </span>
+                <div className="profile-role-primary">
+                  <span>Forward-Deployed Engineer</span>
+                  <span className="role-mobile-break" aria-hidden="true" />
+                  <span className="role-secondary-track">
+                    <span className="role-divider role-divider-leading" aria-hidden="true">
+                      |
+                    </span>
+                    <span>AI Systems Builder</span>
+                    <span className="role-divider" aria-hidden="true">
+                      |
+                    </span>
+                    <span>Production Architect</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
           <TLDR
+            className="about-tldr"
             items={[
-              'I lead customer-embedded investigations in enterprise production systems.',
-              'I design architectures with reliability, security, and observability first.',
-              'I build diagnostic and AI tooling to accelerate root-cause analysis.',
+              'I embed with teams to understand real-world workflows and ship systems that solve them.',
+              'I architect production platforms across APIs, distributed systems, and AI pipelines.',
+              'I build tools, agents, and infrastructure that turn operational complexity into scalable solutions.',
             ]}
           />
-          <div className="skill-pills">
-            <span>Systems Architecture</span>
-            <span>Customer-Embedded Engineering</span>
-            <span>Debugging &amp; Root-Cause Analysis</span>
-            <span>Reliability &amp; Incident Response</span>
-            <span>Security &amp; Risk</span>
-            <span>Observability &amp; Telemetry</span>
-            <span>Applied AI / LLM Reliability</span>
-            <span>Diagnostics Tooling</span>
+          <div className="technical-scope">
+            <h3>Technical Scope</h3>
+            <div className="technical-scope-item">
+              <strong>Systems &amp; Architecture</strong>
+              <p>Production Systems • Distributed Debugging • Observability • Reliability</p>
+            </div>
+            <div className="technical-scope-item">
+              <strong>Applied AI Engineering</strong>
+              <p>LLM Systems • Retrieval Pipelines • Agents • AI Tooling</p>
+            </div>
+            <div className="technical-scope-item">
+              <strong>Deployment &amp; Integration</strong>
+              <p>Enterprise APIs • Identity/Auth • Data Flows • Platform Integrations</p>
+            </div>
+            <div className="technical-scope-item">
+              <strong>Operating Strengths</strong>
+              <p>
+                Embedded Engineering • Root Cause Analysis • Security-Aware Design • Incident
+                Leadership
+              </p>
+            </div>
           </div>
           <p>
-            I’m the founder of HVACOps.ai, an AI-native operations platform that turns equipment
-            manuals, procedures, and tribal knowledge into real-time guidance for technicians in
-            the field. Built for HVAC business owners, the mission is simple: “Make Every Tech Your
-            Best Tech.”
+            <strong>Founder — HVACOps.ai</strong>
+            <br />
+            <span className="role-detail">
+              Architected and deployed a production AI platform that transforms manuals,
+              procedures, and field data into real-time decision support using retrieval
+              pipelines, orchestration logic, and low-latency infrastructure for HVAC field
+              technicians.
+            </span>
           </p>
           <p>
-            By day, I’m a Customer Success Engineer at Tealium, leading complex investigations in
-            enterprise production environments.
-          </p>
-          <ul>
-            <li>Reconstruct system behavior across APIs, auth flows, client code, and networks.</li>
-            <li>Identify root causes quickly to reduce time-to-resolution.</li>
-            <li>Build diagnostic tooling and applied AI for higher-signal observability.</li>
-            <li>Experience across software engineering and customer-embedded problem solving.</li>
-          </ul>
-          <p>
-            <strong>Open to:</strong> collaboration, advisory work, and product partnerships.
+            <strong>Customer Success Engineer — Tealium</strong>
+            <br />
+            <span className="role-detail">
+              Embed directly with enterprise teams to diagnose complex system behavior, design
+              solutions, and guide production implementations across APIs, identity systems, and
+              distributed web architectures.
+            </span>
           </p>
         </section>
       ),

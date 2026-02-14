@@ -955,12 +955,6 @@ main {
     height: 120px;
   }
 
-  .about-section .profile-avatar-button {
-    position: static;
-    align-self: center;
-    margin-bottom: 10px;
-  }
-
   .profile-header {
     flex-direction: column;
     gap: 10px;
@@ -1307,12 +1301,6 @@ main {
 }
 
 @media (max-width: 800px) {
-  .about-section .profile-avatar-button {
-    position: static;
-    align-self: center;
-    margin-bottom: 10px;
-  }
-
   .about-section .profile-header {
     flex-direction: column;
     gap: 10px;
@@ -1364,7 +1352,29 @@ main {
   }
 }
 
+@media (max-width: 600px) {
+  .about-section .profile-role-primary .role-secondary-track {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  .about-section .profile-role-primary .role-secondary-track > .role-divider {
+    display: none;
+  }
+
+  .about-section .profile-role-primary .role-secondary-track > span:last-child {
+    flex-basis: 100%;
+  }
+}
+
 @media (max-width: 500px) {
+  .about-section .profile-avatar-button {
+    position: static;
+    align-self: center;
+    margin-bottom: 10px;
+  }
+
   .about-section .profile-title-block,
   .about-section .profile-name,
   .about-section .profile-role,

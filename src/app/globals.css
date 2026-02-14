@@ -424,6 +424,7 @@ main {
     z-index: 5;
   }
 
+  .mobile-nav a,
   .mobile-nav button {
     border: none;
     background: transparent;
@@ -432,8 +433,10 @@ main {
     color: var(--muted);
     padding: 8px 6px;
     border-radius: 12px;
+    text-align: center;
   }
 
+  .mobile-nav a.active,
   .mobile-nav button.active {
     background: var(--accent-soft);
     color: var(--accent-strong);
@@ -496,6 +499,7 @@ main {
     color: var(--ink);
   }
 
+  .mobile-sheet-list a.active,
   .mobile-sheet-list button.active {
     background: var(--accent-soft);
     border-color: #99f6e4;

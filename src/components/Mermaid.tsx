@@ -1,19 +1,8 @@
 'use client';
 
 import { useEffect, useId, useState } from 'react';
-import mermaid from 'mermaid';
 
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'base',
-  themeVariables: {
-    primaryColor: '#e8f5f2',
-    primaryBorderColor: '#94a3b8',
-    lineColor: '#334155',
-    textColor: '#1f2937',
-    fontFamily: 'IBM Plex Sans',
-  },
-});
+let mermaidInitialized = false;
 
 export function Mermaid({
   chart,
@@ -27,14 +16,32 @@ export function Mermaid({
 
   useEffect(() => {
     let active = true;
-    mermaid
-      .render(`mermaid-${id}`, chart)
-      .then((result) => {
+    const renderChart = async () => {
+      try {
+        const { default: mermaid } = await import('mermaid');
+        if (!mermaidInitialized) {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+              primaryColor: '#e8f5f2',
+              primaryBorderColor: '#94a3b8',
+              lineColor: '#334155',
+              textColor: '#1f2937',
+              fontFamily: 'IBM Plex Sans',
+            },
+          });
+          mermaidInitialized = true;
+        }
+        const result = await mermaid.render(`mermaid-${id}`, chart);
         if (active) setSvg(result.svg);
-      })
-      .catch(() => {
+      } catch {
         if (active) setSvg('<pre>Diagram failed to render.</pre>');
-      });
+      }
+    };
+
+    renderChart();
+
     return () => {
       active = false;
     };

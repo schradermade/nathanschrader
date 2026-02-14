@@ -711,7 +711,10 @@ export function PortfolioShell() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxSvg, setLightboxSvg] = useState<string | null>(null);
   const [mobilePanel, setMobilePanel] = useState<'projects' | 'dossiers' | 'links' | null>(null);
+  const [isNavigating, setIsNavigating] = useState(false);
   const scrollYRef = useRef(0);
+  const navTimerRef = useRef<number | null>(null);
+  const previousPathRef = useRef<string | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const handleImageClick = useCallback((src: string) => {
@@ -1034,6 +1037,31 @@ flowchart TB
   }, [projectSections, router]);
 
   useEffect(() => {
+    if (previousPathRef.current === null) {
+      previousPathRef.current = pathname;
+      return;
+    }
+
+    if (previousPathRef.current !== pathname) {
+      if (navTimerRef.current !== null) {
+        window.clearTimeout(navTimerRef.current);
+      }
+      navTimerRef.current = window.setTimeout(() => {
+        setIsNavigating(false);
+      }, 900);
+      previousPathRef.current = pathname;
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (navTimerRef.current !== null) {
+        window.clearTimeout(navTimerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     if (!lightboxSrc && !lightboxSvg) {
       document.body.style.overflow = '';
       document.body.style.position = '';
@@ -1077,6 +1105,33 @@ flowchart TB
     return '/';
   };
 
+  const normalizePath = (value: string) => {
+    const [withoutHash] = value.split('#');
+    const [withoutQuery] = withoutHash.split('?');
+    if (withoutQuery.length > 1 && withoutQuery.endsWith('/')) {
+      return withoutQuery.slice(0, -1);
+    }
+    return withoutQuery || '/';
+  };
+
+  const beginNavigation = (targetHref?: string) => {
+    if (navTimerRef.current !== null) {
+      window.clearTimeout(navTimerRef.current);
+      navTimerRef.current = null;
+    }
+
+    if (targetHref) {
+      const targetPath = normalizePath(targetHref);
+      const currentPath = normalizePath(pathname ?? '/');
+      if (targetPath === currentPath) {
+        setIsNavigating(false);
+        return;
+      }
+    }
+
+    setIsNavigating(true);
+  };
+
   useLayoutEffect(() => {
     const updateConnector = () => {
       if (!navRef.current || !activeProjectRef.current || !activeLabelRef.current) {
@@ -1110,6 +1165,7 @@ flowchart TB
 
   return (
     <main className="single-shell">
+      <div className="nav-pane">
       <aside className="nav single-nav" ref={navRef}>
         <h2>Nathan Schrader</h2>
         <div className="nav-group">
@@ -1117,6 +1173,7 @@ flowchart TB
             href={getProjectHref('main')}
             prefetch
             scroll={false}
+            onClick={() => beginNavigation(getProjectHref('main'))}
             className={activeProject === 'main' ? 'active' : ''}
           >
             About
@@ -1131,6 +1188,7 @@ flowchart TB
               href={getProjectHref(project.id)}
               prefetch
               scroll={false}
+              onClick={() => beginNavigation(getProjectHref(project.id))}
               className={activeProject === project.id ? 'active' : ''}
             >
               {project.label}
@@ -1146,6 +1204,7 @@ flowchart TB
               href={getProjectHref(project.id)}
               prefetch
               scroll={false}
+              onClick={() => beginNavigation(getProjectHref(project.id))}
               className={activeProject === project.id ? 'active' : ''}
               ref={activeProject === project.id ? activeProjectRef : null}
             >
@@ -1164,6 +1223,7 @@ flowchart TB
                 href={getPortfolioPath(activeProject, section.id)}
                 prefetch
                 scroll={false}
+                onClick={() => beginNavigation(getPortfolioPath(activeProject, section.id))}
                 className={activeId === section.id ? 'active' : ''}
                 ref={activeId === section.id ? activeLabelRef : null}
               >
@@ -1195,14 +1255,20 @@ flowchart TB
           </svg>
         ) : null}
       </aside>
-      <div className="doc-content">{activeSection.content}</div>
+      </div>
+      <div className="content-pane">
+        <div className="doc-content">{activeSection.content}</div>
+      </div>
       <nav className="mobile-nav" aria-label="Primary">
         <Link
           href={getProjectHref('main')}
           prefetch
           scroll={false}
           className={activeProject === 'main' ? 'active' : ''}
-          onClick={() => setMobilePanel(null)}
+          onClick={() => {
+            beginNavigation(getProjectHref('main'));
+            setMobilePanel(null);
+          }}
         >
           About
         </Link>
@@ -1258,7 +1324,10 @@ flowchart TB
                     prefetch
                     scroll={false}
                     className={activeProject === project.id ? 'active' : ''}
-                    onClick={() => setMobilePanel(null)}
+                    onClick={() => {
+                      beginNavigation(getProjectHref(project.id));
+                      setMobilePanel(null);
+                    }}
                   >
                     {project.label}
                   </Link>
@@ -1274,6 +1343,7 @@ flowchart TB
                     prefetch
                     scroll={false}
                     className={activeProject === project.id ? 'active' : ''}
+                    onClick={() => beginNavigation(getProjectHref(project.id))}
                   >
                     {project.label}
                   </Link>
@@ -1286,7 +1356,10 @@ flowchart TB
                       prefetch
                       scroll={false}
                       className={activeId === section.id ? 'active' : ''}
-                      onClick={() => setMobilePanel(null)}
+                      onClick={() => {
+                        beginNavigation(getPortfolioPath('hvacops', section.id));
+                        setMobilePanel(null);
+                      }}
                     >
                       {section.label}
                     </Link>
@@ -1347,6 +1420,11 @@ flowchart TB
             document.body
           )
         : null}
+      {isNavigating ? (
+        <div className="route-spinner" aria-hidden="true">
+          <span className="route-spinner-dot" />
+        </div>
+      ) : null}
     </main>
   );
 }

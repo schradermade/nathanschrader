@@ -652,11 +652,7 @@ const buildProjectSections = ({
           </div>
           <TLDR
             className="about-tldr"
-            items={[
-              'I embed with teams to understand real-world workflows and ship systems that solve them.',
-              'I architect production platforms across APIs, distributed systems, and AI pipelines.',
-              'I build tools, agents, and infrastructure that turn operational complexity into scalable solutions.',
-            ]}
+            items={['Architecting and deploying real-world AI systems.']}
           />
           <div className="technical-scope">
             <h3>Technical Scope</h3>

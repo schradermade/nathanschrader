@@ -1,7 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -29,8 +36,8 @@ const buildBaseSections = ({
         <span className="kicker">Cover</span>
         <h1 className="doc-title">HVACOps.ai — Technical Dossier</h1>
         <p className="doc-subtitle">
-          A professional AI engagement plan and architecture proposal for technicians,
-          stakeholders, and reviewers.
+          A professional AI engagement plan and architecture proposal for
+          technicians, stakeholders, and reviewers.
         </p>
         <TLDR
           items={[
@@ -54,8 +61,8 @@ const buildBaseSections = ({
           </a>
         </div>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> confirm hosting domain, link the live demo,
-          and add a PDF export workflow.
+          <strong>Open questions / next steps:</strong> confirm hosting domain,
+          link the live demo, and add a PDF export workflow.
         </div>
       </section>
     ),
@@ -68,17 +75,19 @@ const buildBaseSections = ({
         <span className="kicker">Executive Summary</span>
         <h2>Executive Summary</h2>
         <p>
-          The HVACOps AI copilot is a job-scoped assistant designed for technicians working under
-          real-world constraints: incomplete data, safety-critical workflows, and strict time
-          pressure. The product goal is not to answer questions, but to support a decision in the
-          field with evidence-based responses and a clear audit trail.
+          The HVACOps AI copilot is a job-scoped assistant designed for
+          technicians working under real-world constraints: incomplete data,
+          safety-critical workflows, and strict time pressure. The product goal
+          is not to answer questions, but to support a decision in the field
+          with evidence-based responses and a clear audit trail.
         </p>
         <p>
-          This dossier outlines how we move from discovery to a pilot-ready system in four weeks,
-          while keeping trust, security, and reliability as first-class requirements. The system
-          design is Cloudflare-first: Workers orchestrate requests, D1 stores structured job
-          context, Vectorize and R2 handle retrieval and artifacts, and AI Gateway mediates model
-          calls with logging and caching.
+          This dossier outlines how we move from discovery to a pilot-ready
+          system in four weeks, while keeping trust, security, and reliability
+          as first-class requirements. The system design is Cloudflare-first:
+          Workers orchestrate requests, D1 stores structured job context,
+          Vectorize and R2 handle retrieval and artifacts, and AI Gateway
+          mediates model calls with logging and caching.
         </p>
         <TLDR
           items={[
@@ -91,17 +100,26 @@ const buildBaseSections = ({
         />
         <h3>Who this is for</h3>
         <ul>
-          <li>HVAC owners and dispatch: fewer callbacks, better documentation, faster resolution.</li>
           <li>
-            Technicians: fast context assembly, safety-aware reminders, and evidence-backed
-            summaries.
+            HVAC owners and dispatch: fewer callbacks, better documentation,
+            faster resolution.
           </li>
-          <li>Security reviewers: explicit tenant isolation, least-privilege services, and auditability.</li>
-          <li>Engineering leadership: a clear scope, risk register, and delivery cadence.</li>
+          <li>
+            Technicians: fast context assembly, safety-aware reminders, and
+            evidence-backed summaries.
+          </li>
+          <li>
+            Security reviewers: explicit tenant isolation, least-privilege
+            services, and auditability.
+          </li>
+          <li>
+            Engineering leadership: a clear scope, risk register, and delivery
+            cadence.
+          </li>
         </ul>
         <Callout variant="decision">
-          We will ship a job-scoped copilot first, not a general HVAC chatbot, to keep context,
-          safety, and ownership explicit.
+          We will ship a job-scoped copilot first, not a general HVAC chatbot,
+          to keep context, safety, and ownership explicit.
         </Callout>
         <h3>What success looks like</h3>
         <ul>
@@ -111,19 +129,23 @@ const buildBaseSections = ({
           <li>Safety: zero unsafe suggestions in the high-risk eval set.</li>
         </ul>
         <Callout variant="tradeoff">
-          We prefer determinism over creativity: temperature stays low, and structured output is
-          enforced.
+          We prefer determinism over creativity: temperature stays low, and
+          structured output is enforced.
         </Callout>
         <h3>Non-goals</h3>
         <ul>
           <li>No autonomous troubleshooting without evidence.</li>
           <li>No wiring diagram interpretation without a manual reference.</li>
-          <li>No cross-tenant insights or aggregate analytics in the copilot response.</li>
+          <li>
+            No cross-tenant insights or aggregate analytics in the copilot
+            response.
+          </li>
         </ul>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> confirm the initial success metrics with
-          stakeholders, prioritize risk categories (electrical, gas, refrigerant), and validate the
-          minimum viable eval set.
+          <strong>Open questions / next steps:</strong> confirm the initial
+          success metrics with stakeholders, prioritize risk categories
+          (electrical, gas, refrigerant), and validate the minimum viable eval
+          set.
         </div>
       </section>
     ),
@@ -147,11 +169,14 @@ const buildBaseSections = ({
         <h3>Week 0 — Discovery + Access</h3>
         <ul>
           <li>Stakeholder map and workflow walkthroughs.</li>
-          <li>Data inventory: notes, job events, equipment, manuals, attachments.</li>
+          <li>
+            Data inventory: notes, job events, equipment, manuals, attachments.
+          </li>
           <li>Threat model draft and trust boundary diagram.</li>
         </ul>
         <Callout variant="mitigation">
-          Run a sampling audit of 50 recent jobs to quantify evidence coverage and identify gaps.
+          Run a sampling audit of 50 recent jobs to quantify evidence coverage
+          and identify gaps.
         </Callout>
         <h3>Week 1 — Instrumentation + Baseline</h3>
         <ul>
@@ -160,8 +185,8 @@ const buildBaseSections = ({
           <li>Logging schema for citations, abstentions, and latency.</li>
         </ul>
         <Callout variant="tradeoff">
-          Prioritize low-latency structured context for first responses, then enrich with
-          retrieval.
+          Prioritize low-latency structured context for first responses, then
+          enrich with retrieval.
         </Callout>
         <h3>Week 2 — Prototype + Eval Harness</h3>
         <ul>
@@ -170,7 +195,8 @@ const buildBaseSections = ({
           <li>First reliability dashboard.</li>
         </ul>
         <Callout variant="mitigation">
-          Introduce hybrid retrieval (vector + keyword) and limit to job-scoped filters.
+          Introduce hybrid retrieval (vector + keyword) and limit to job-scoped
+          filters.
         </Callout>
         <h3>Week 3 — Pilot + Guardrails</h3>
         <ul>
@@ -191,8 +217,9 @@ const buildBaseSections = ({
           Ship runbooks alongside monitoring dashboards and alert routing.
         </Callout>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> confirm pilot cohort, define owner for eval
-          set maintenance, and decide whether to include AI Gateway caching in week two or three.
+          <strong>Open questions / next steps:</strong> confirm pilot cohort,
+          define owner for eval set maintenance, and decide whether to include
+          AI Gateway caching in week two or three.
         </div>
       </section>
     ),
@@ -215,37 +242,45 @@ const buildBaseSections = ({
         <h3>Latency &amp; Offline Constraints</h3>
         <ul>
           <li>P95 response time under 2.5 seconds for typical queries.</li>
-          <li>First response should succeed even with limited connectivity by using cached context.</li>
+          <li>
+            First response should succeed even with limited connectivity by
+            using cached context.
+          </li>
           <li>Mobile-friendly streaming responses for long answers.</li>
         </ul>
         <Callout variant="tradeoff">
-          We accept slightly less context if it keeps the first answer under the latency budget.
+          We accept slightly less context if it keeps the first answer under the
+          latency budget.
         </Callout>
         <h3>Accuracy Requirements by Content Type</h3>
         <ul>
           <li>Procedures: must be backed by explicit evidence or refuse.</li>
           <li>Part numbers: require exact keyword matches.</li>
           <li>Error codes: must cite source notes or manuals.</li>
-          <li>Wiring diagrams: never interpret without a linked manual reference.</li>
+          <li>
+            Wiring diagrams: never interpret without a linked manual reference.
+          </li>
         </ul>
         <Callout variant="risk">
-          High-risk procedures (electrical, gas, refrigerant) require evidence plus safety reminders.
+          High-risk procedures (electrical, gas, refrigerant) require evidence
+          plus safety reminders.
         </Callout>
         <h3>Data Sources &amp; Trust Levels</h3>
         <p>
-          <strong>Authoritative</strong>: job records, equipment inventory, and structured events in
-          D1.
+          <strong>Authoritative</strong>: job records, equipment inventory, and
+          structured events in D1.
         </p>
         <p>
-          <strong>Supporting</strong>: technician notes, office notes, call logs in Vectorize.
+          <strong>Supporting</strong>: technician notes, office notes, call logs
+          in Vectorize.
         </p>
         <p>
-          <strong>External</strong>: manuals and attachments stored in R2; only referenced with
-          citations.
+          <strong>External</strong>: manuals and attachments stored in R2; only
+          referenced with citations.
         </p>
         <Callout variant="decision">
-          Structured facts always lead; retrieval is additive and never overrides system-of-record
-          data.
+          Structured facts always lead; retrieval is additive and never
+          overrides system-of-record data.
         </Callout>
         <h3>Permissions &amp; Tenancy</h3>
         <ul>
@@ -254,8 +289,9 @@ const buildBaseSections = ({
           <li>Retrieval filters always include tenant and job identifiers.</li>
         </ul>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> finalize accuracy targets by content type
-          and determine which manual formats are supported in the first release.
+          <strong>Open questions / next steps:</strong> finalize accuracy
+          targets by content type and determine which manual formats are
+          supported in the first release.
         </div>
       </section>
     ),
@@ -290,32 +326,47 @@ flowchart TB
           onClick={onDiagramClick}
         />
         <Callout variant="decision">
-          Cloudflare-first architecture is chosen for global latency, integrated services, and
-          cost predictability.
+          Cloudflare-first architecture is chosen for global latency, integrated
+          services, and cost predictability.
         </Callout>
         <h3>Data Flow (Ingestion → Retrieval → Response)</h3>
         <ol>
-          <li>Structured context pulled from D1 (job, client, property, equipment).</li>
-          <li>Semantic retrieval queries Vectorize for notes and event history.</li>
-          <li>Prompt assembly combines structured facts + retrieved evidence.</li>
+          <li>
+            Structured context pulled from D1 (job, client, property,
+            equipment).
+          </li>
+          <li>
+            Semantic retrieval queries Vectorize for notes and event history.
+          </li>
+          <li>
+            Prompt assembly combines structured facts + retrieved evidence.
+          </li>
           <li>Model inference runs via AI Gateway with logging and caching.</li>
-          <li>Post-processing enforces schema and citations, then logs an audit trail.</li>
+          <li>
+            Post-processing enforces schema and citations, then logs an audit
+            trail.
+          </li>
         </ol>
         <Callout variant="tradeoff">
-          We do not precompute everything: on-demand context stays fresh but adds latency.
+          We do not precompute everything: on-demand context stays fresh but
+          adds latency.
         </Callout>
         <h3>Tenancy Model</h3>
         <ul>
           <li>Each request carries a tenant-scoped JWT.</li>
           <li>Retrieval filters include tenant_id and job_id.</li>
-          <li>Audit logs store tenant context, evidence IDs, and output hashes.</li>
+          <li>
+            Audit logs store tenant context, evidence IDs, and output hashes.
+          </li>
         </ul>
         <Callout variant="risk">
-          Any missing tenant filter is a data isolation failure; these checks are non-negotiable.
+          Any missing tenant filter is a data isolation failure; these checks
+          are non-negotiable.
         </Callout>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> confirm whether Durable Objects are needed
-          for session state in the first release and define retention policies for R2 artifacts.
+          <strong>Open questions / next steps:</strong> confirm whether Durable
+          Objects are needed for session state in the first release and define
+          retention policies for R2 artifacts.
         </div>
       </section>
     ),
@@ -371,11 +422,17 @@ flowchart LR
         <h3>Refusal &amp; Escalation</h3>
         <ul>
           <li>Safety-critical requests require explicit evidence.</li>
-          <li>If high risk and evidence is weak, escalate to a checklist or supervisor.</li>
-          <li>Unsupported requests receive an explicit out-of-scope response.</li>
+          <li>
+            If high risk and evidence is weak, escalate to a checklist or
+            supervisor.
+          </li>
+          <li>
+            Unsupported requests receive an explicit out-of-scope response.
+          </li>
         </ul>
         <Callout variant="risk">
-          Any ungrounded advice in electrical, gas, or refrigerant workflows is unacceptable.
+          Any ungrounded advice in electrical, gas, or refrigerant workflows is
+          unacceptable.
         </Callout>
         <h3>Evaluation Plan</h3>
         <ul>
@@ -384,8 +441,9 @@ flowchart LR
           <li>Human review loop: weekly sampling of production answers.</li>
         </ul>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> choose initial model(s), define minimum
-          coverage for the golden set, and set thresholds for auto-rollback.
+          <strong>Open questions / next steps:</strong> choose initial model(s),
+          define minimum coverage for the golden set, and set thresholds for
+          auto-rollback.
         </div>
       </section>
     ),
@@ -422,12 +480,17 @@ flowchart LR
           <li>Cost per session (via AI Gateway)</li>
         </ul>
         <Callout variant="tradeoff">
-          We track fewer metrics, but make them actionable and tied to product decisions.
+          We track fewer metrics, but make them actionable and tied to product
+          decisions.
         </Callout>
         <h3>Incident Playbook (Condensed)</h3>
         <ol>
-          <li>Detect anomaly (latency spike, unsafe output, or retrieval failure).</li>
-          <li>Flip to safe mode (abstain without evidence; disable risky tools).</li>
+          <li>
+            Detect anomaly (latency spike, unsafe output, or retrieval failure).
+          </li>
+          <li>
+            Flip to safe mode (abstain without evidence; disable risky tools).
+          </li>
           <li>Roll back prompt or retrieval changes.</li>
           <li>Postmortem with evidence logs and remediation steps.</li>
         </ol>
@@ -435,8 +498,8 @@ flowchart LR
           Without safe mode, the only recovery path is a full outage.
         </Callout>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> choose the alerting thresholds and define
-          ownership for eval regression triage.
+          <strong>Open questions / next steps:</strong> choose the alerting
+          thresholds and define ownership for eval regression triage.
         </div>
       </section>
     ),
@@ -476,26 +539,34 @@ flowchart LR
         <h3>Auth &amp; Tenancy</h3>
         <ul>
           <li>PKCE login through Cloudflare Access OIDC.</li>
-          <li>Auth Worker issues short-lived access tokens and rotating refresh tokens.</li>
-          <li>API Worker validates JWTs and enforces tenant_id on every query.</li>
+          <li>
+            Auth Worker issues short-lived access tokens and rotating refresh
+            tokens.
+          </li>
+          <li>
+            API Worker validates JWTs and enforces tenant_id on every query.
+          </li>
         </ul>
         <Callout variant="decision">
-          We do not ship Access client secrets in the mobile app; the Auth Worker brokers all
-          sensitive flows.
+          We do not ship Access client secrets in the mobile app; the Auth
+          Worker brokers all sensitive flows.
         </Callout>
         <h3>Data Retention &amp; Privacy</h3>
         <ul>
           <li>R2 lifecycle policies for manuals and transcripts.</li>
           <li>Audit logs retain evidence references, not raw PII.</li>
-          <li>Secure secrets storage via Worker secrets and scoped service bindings.</li>
+          <li>
+            Secure secrets storage via Worker secrets and scoped service
+            bindings.
+          </li>
         </ul>
         <Callout variant="mitigation">
-          Redact or hash sensitive fields before logging, and store only what is required for
-          audits.
+          Redact or hash sensitive fields before logging, and store only what is
+          required for audits.
         </Callout>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> confirm retention periods, audit access
-          policies, and security review cadence.
+          <strong>Open questions / next steps:</strong> confirm retention
+          periods, audit access policies, and security review cadence.
         </div>
       </section>
     ),
@@ -517,27 +588,42 @@ flowchart LR
         <h3>Architecture Snapshot</h3>
         <ul>
           <li>Feature-based client architecture for HVACOps mobile.</li>
-          <li>Cloudflare-first backend plan (Workers, D1, Vectorize, R2, AI Gateway).</li>
+          <li>
+            Cloudflare-first backend plan (Workers, D1, Vectorize, R2, AI
+            Gateway).
+          </li>
           <li>Job-scoped AI copilot flow with citations and audit trail.</li>
         </ul>
         <Callout variant="tradeoff">
-          The current plan favors a reliable, auditable pipeline over fast but opaque LLM calls.
+          The current plan favors a reliable, auditable pipeline over fast but
+          opaque LLM calls.
         </Callout>
         <h3>Current Limitations</h3>
         <ul>
-          <li>Retrieval and eval harness are designed but not yet validated with live data.</li>
-          <li>Manual ingestion and wiring diagram handling need final workflows.</li>
+          <li>
+            Retrieval and eval harness are designed but not yet validated with
+            live data.
+          </li>
+          <li>
+            Manual ingestion and wiring diagram handling need final workflows.
+          </li>
           <li>Observability dashboards require implementation.</li>
         </ul>
         <h3>Next Build Steps</h3>
         <ol>
-          <li>Stand up the Workers endpoints and Auth Worker in a staging environment.</li>
-          <li>Populate D1 with real job/event data and validate retrieval precision.</li>
+          <li>
+            Stand up the Workers endpoints and Auth Worker in a staging
+            environment.
+          </li>
+          <li>
+            Populate D1 with real job/event data and validate retrieval
+            precision.
+          </li>
           <li>Implement eval suite and gating for prompt updates.</li>
         </ol>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> decide the first pilot data set and
-          determine the production model provider.
+          <strong>Open questions / next steps:</strong> decide the first pilot
+          data set and determine the production model provider.
         </div>
       </section>
     ),
@@ -567,9 +653,18 @@ flowchart LR
         </pre>
         <h3>Data Schema (Excerpt)</h3>
         <ul>
-          <li>jobs: id, tenant_id, property_id, client_id, job_type, scheduled_at, status</li>
-          <li>equipment: id, tenant_id, property_id, brand, model, serial, installed_at</li>
-          <li>notes: id, tenant_id, entity_type, entity_id, content, author_user_id</li>
+          <li>
+            jobs: id, tenant_id, property_id, client_id, job_type, scheduled_at,
+            status
+          </li>
+          <li>
+            equipment: id, tenant_id, property_id, brand, model, serial,
+            installed_at
+          </li>
+          <li>
+            notes: id, tenant_id, entity_type, entity_id, content,
+            author_user_id
+          </li>
         </ul>
         <h3>Eval Rubric (Excerpt)</h3>
         <ul>
@@ -581,27 +676,28 @@ flowchart LR
         <h3>Glossary</h3>
         <ul>
           <li>
-            <strong>Job-scoped</strong>: context limited to a single job and tenant.
+            <strong>Job-scoped</strong>: context limited to a single job and
+            tenant.
           </li>
           <li>
-            <strong>Evidence</strong>: notes, events, and manuals retrieved for citations.
+            <strong>Evidence</strong>: notes, events, and manuals retrieved for
+            citations.
           </li>
           <li>
-            <strong>Abstention</strong>: safe refusal when evidence is missing or risk is high.
+            <strong>Abstention</strong>: safe refusal when evidence is missing
+            or risk is high.
           </li>
         </ul>
         <div className="section-footer">
-          <strong>Open questions / next steps:</strong> expand the rubric to include latency
-          weighting and add a versioned prompt catalog.
+          <strong>Open questions / next steps:</strong> expand the rubric to
+          include latency weighting and add a versioned prompt catalog.
         </div>
       </section>
     ),
   },
 ];
 
-const projects = [
-  { id: 'hvacops', label: 'HVACOps.ai' },
-];
+const projects = [{ id: 'hvacops', label: 'HVACOps.ai' }];
 
 const uiProjects = [
   { id: 'jarvis', label: 'Jarvis (utag.DB Logger)' },
@@ -628,16 +724,23 @@ const buildProjectSections = ({
               className="image-button profile-avatar-button"
               onClick={() => onImageClick('/headshot.png')}
             >
-              <img className="profile-avatar" src="/headshot.png" alt="Nathan Schrader" />
+              <img
+                className="profile-avatar"
+                src="/headshot.png"
+                alt="Nathan Schrader"
+              />
             </button>
             <div className="profile-title-block">
               <h1 className="doc-title profile-name">Nathan Schrader</h1>
               <div className="profile-role">
                 <div className="profile-role-primary">
-                  <span>Forward-Deployed Engineer</span>
+                  <span>Customer Engineer</span>
                   <span className="role-mobile-break" aria-hidden="true" />
                   <span className="role-secondary-track">
-                    <span className="role-divider role-divider-leading" aria-hidden="true">
+                    <span
+                      className="role-divider role-divider-leading"
+                      aria-hidden="true"
+                    >
                       |
                     </span>
                     <span>AI Systems Builder</span>
@@ -658,7 +761,10 @@ const buildProjectSections = ({
             <h3>Technical Scope</h3>
             <div className="technical-scope-item">
               <strong>Systems &amp; Architecture</strong>
-              <p>Production Systems • Distributed Debugging • Observability • Reliability</p>
+              <p>
+                Production Systems • Distributed Debugging • Observability •
+                Reliability
+              </p>
             </div>
             <div className="technical-scope-item">
               <strong>Applied AI Engineering</strong>
@@ -666,13 +772,16 @@ const buildProjectSections = ({
             </div>
             <div className="technical-scope-item">
               <strong>Deployment &amp; Integration</strong>
-              <p>Enterprise APIs • Identity/Auth • Data Flows • Platform Integrations</p>
+              <p>
+                Enterprise APIs • Identity/Auth • Data Flows • Platform
+                Integrations
+              </p>
             </div>
             <div className="technical-scope-item">
               <strong>Operating Strengths</strong>
               <p>
-                Embedded Engineering • Root Cause Analysis • Security-Aware Design • Incident
-                Leadership
+                Embedded Engineering • Root Cause Analysis • Security-Aware
+                Design • Incident Leadership
               </p>
             </div>
           </div>
@@ -680,19 +789,19 @@ const buildProjectSections = ({
             <strong>Founder — HVACOps.ai</strong>
             <br />
             <span className="role-detail">
-              Architected and deployed a production AI platform that transforms manuals,
-              procedures, and field data into real-time decision support using retrieval
-              pipelines, orchestration logic, and low-latency infrastructure for HVAC field
-              technicians.
+              Architected and deployed a production AI platform that transforms
+              manuals, procedures, and field data into real-time decision
+              support using retrieval pipelines, orchestration logic, and
+              low-latency infrastructure for HVAC field technicians.
             </span>
           </p>
           <p>
             <strong>Customer Success Engineer — Tealium</strong>
             <br />
             <span className="role-detail">
-              Embed directly with enterprise teams to diagnose complex system behavior, design
-              solutions, and guide production implementations across APIs, identity systems, and
-              distributed web architectures.
+              Embed directly with enterprise teams to diagnose complex system
+              behavior, design solutions, and guide production implementations
+              across APIs, identity systems, and distributed web architectures.
             </span>
           </p>
         </section>
@@ -706,7 +815,9 @@ export function PortfolioShell() {
   const [connectorPath, setConnectorPath] = useState<string>('');
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxSvg, setLightboxSvg] = useState<string | null>(null);
-  const [mobilePanel, setMobilePanel] = useState<'projects' | 'dossiers' | 'links' | null>(null);
+  const [mobilePanel, setMobilePanel] = useState<
+    'projects' | 'dossiers' | 'links' | null
+  >(null);
   const [isNavigating, setIsNavigating] = useState(false);
   const scrollYRef = useRef(0);
   const navTimerRef = useRef<number | null>(null);
@@ -727,7 +838,7 @@ export function PortfolioShell() {
         onImageClick: handleImageClick,
         onDiagramClick: handleDiagramClick,
       }),
-    [handleImageClick, handleDiagramClick]
+    [handleImageClick, handleDiagramClick],
   );
   const projectViews = useMemo<Record<string, Section[]>>(
     () => ({
@@ -736,73 +847,95 @@ export function PortfolioShell() {
           id: 'jarvis',
           label: 'Jarvis',
           content: (
-          <section>
-            <span className="kicker">Project</span>
-            <h1 className="doc-title">Jarvis — utag.DB Logger</h1>
-            <p className="doc-subtitle">
-              A Chrome MV3 extension for Tealium debugging that captures utag.DB logs in the page
-              context, monitors consent state, and exports a single case file for analysis.
-            </p>
-            <TLDR
-              items={[
-                'Captures utag.DB logs without console scraping.',
-                'Per-tab session isolation with exportable case files.',
-                'Consent + storage snapshots alongside logs.',
-                'Optional local server for send_utag payloads.',
-              ]}
-            />
-            <div className="cover-links">
-              <a
-                href="https://github.com/schradermade/utagdb-logger"
-                target="_blank"
-                rel="noreferrer"
-              >
-                github.com/schradermade/utagdb-logger
-              </a>
-            </div>
-            <div className="project-media">
-              <figure>
-                <button
-                  type="button"
-                  className="image-button"
-                  onClick={() => {
-                    setLightboxSvg(null);
-                    setLightboxSrc('/jarvis-1.png');
-                  }}
+            <section>
+              <span className="kicker">Project</span>
+              <h1 className="doc-title">Jarvis — utag.DB Logger</h1>
+              <p className="doc-subtitle">
+                A Chrome MV3 extension for Tealium debugging that captures
+                utag.DB logs in the page context, monitors consent state, and
+                exports a single case file for analysis.
+              </p>
+              <TLDR
+                items={[
+                  'Captures utag.DB logs without console scraping.',
+                  'Per-tab session isolation with exportable case files.',
+                  'Consent + storage snapshots alongside logs.',
+                  'Optional local server for send_utag payloads.',
+                ]}
+              />
+              <div className="cover-links">
+                <a
+                  href="https://github.com/schradermade/utagdb-logger"
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  <img src="/jarvis-1.png" alt="Jarvis side panel view with logger tools." />
-                </button>
-                <figcaption>Side panel tools with logger, consent, and export workflow.</figcaption>
-              </figure>
-              <figure>
-                <button
-                  type="button"
-                  className="image-button"
-                  onClick={() => {
-                    setLightboxSvg(null);
-                    setLightboxSrc('/jarvis-2.png');
-                  }}
-                >
-                  <img src="/jarvis-2.png" alt="Jarvis export and preview workflow." />
-                </button>
-                <figcaption>Export case file preview with recent exports list.</figcaption>
-              </figure>
-            </div>
-            <h3>Key capabilities</h3>
-            <ul>
-              <li>Page-context utag.DB capture with strict tab isolation.</li>
-              <li>Consent/CMP snapshotting with GPC visibility.</li>
-              <li>Storage map snapshots (cookies, local/session storage, utag data).</li>
-              <li>Single case file export for handoff to LLMs or support teams.</li>
-            </ul>
-            <h3>Architecture summary</h3>
-            <ul>
-              <li>console-bridge.js injects into MAIN world and posts entries.</li>
-              <li>content.js relays data to background service worker.</li>
-              <li>background.js persists sessions in chrome.storage.local.</li>
-              <li>sidepanel.js renders tools and builds case file exports.</li>
-            </ul>
-          </section>
+                  github.com/schradermade/utagdb-logger
+                </a>
+              </div>
+              <div className="project-media">
+                <figure>
+                  <button
+                    type="button"
+                    className="image-button"
+                    onClick={() => {
+                      setLightboxSvg(null);
+                      setLightboxSrc('/jarvis-1.png');
+                    }}
+                  >
+                    <img
+                      src="/jarvis-1.png"
+                      alt="Jarvis side panel view with logger tools."
+                    />
+                  </button>
+                  <figcaption>
+                    Side panel tools with logger, consent, and export workflow.
+                  </figcaption>
+                </figure>
+                <figure>
+                  <button
+                    type="button"
+                    className="image-button"
+                    onClick={() => {
+                      setLightboxSvg(null);
+                      setLightboxSrc('/jarvis-2.png');
+                    }}
+                  >
+                    <img
+                      src="/jarvis-2.png"
+                      alt="Jarvis export and preview workflow."
+                    />
+                  </button>
+                  <figcaption>
+                    Export case file preview with recent exports list.
+                  </figcaption>
+                </figure>
+              </div>
+              <h3>Key capabilities</h3>
+              <ul>
+                <li>Page-context utag.DB capture with strict tab isolation.</li>
+                <li>Consent/CMP snapshotting with GPC visibility.</li>
+                <li>
+                  Storage map snapshots (cookies, local/session storage, utag
+                  data).
+                </li>
+                <li>
+                  Single case file export for handoff to LLMs or support teams.
+                </li>
+              </ul>
+              <h3>Architecture summary</h3>
+              <ul>
+                <li>
+                  console-bridge.js injects into MAIN world and posts entries.
+                </li>
+                <li>content.js relays data to background service worker.</li>
+                <li>
+                  background.js persists sessions in chrome.storage.local.
+                </li>
+                <li>
+                  sidepanel.js renders tools and builds case file exports.
+                </li>
+              </ul>
+            </section>
           ),
         },
       ],
@@ -815,8 +948,8 @@ export function PortfolioShell() {
               <span className="kicker">Project</span>
               <h1 className="doc-title">Hotspotti Mobile</h1>
               <p className="doc-subtitle">
-                A cross-platform mobile app for discovering and exploring hotspots, with a
-                map-first UX and real-time updates.
+                A cross-platform mobile app for discovering and exploring
+                hotspots, with a map-first UX and real-time updates.
               </p>
               <TLDR
                 items={[
@@ -845,9 +978,14 @@ export function PortfolioShell() {
                       setLightboxSrc('/hotspotti-1.jpeg');
                     }}
                   >
-                    <img src="/hotspotti-1.jpeg" alt="Hotspotti app screen overview." />
+                    <img
+                      src="/hotspotti-1.jpeg"
+                      alt="Hotspotti app screen overview."
+                    />
                   </button>
-                  <figcaption>Map-first discovery with nearby hotspots.</figcaption>
+                  <figcaption>
+                    Map-first discovery with nearby hotspots.
+                  </figcaption>
                 </figure>
                 <figure>
                   <button
@@ -858,9 +996,14 @@ export function PortfolioShell() {
                       setLightboxSrc('/hotspotti-2.jpeg');
                     }}
                   >
-                    <img src="/hotspotti-2.jpeg" alt="Hotspotti app detail view." />
+                    <img
+                      src="/hotspotti-2.jpeg"
+                      alt="Hotspotti app detail view."
+                    />
                   </button>
-                  <figcaption>Hotspot detail view with rich context.</figcaption>
+                  <figcaption>
+                    Hotspot detail view with rich context.
+                  </figcaption>
                 </figure>
                 <figure>
                   <button
@@ -871,18 +1014,37 @@ export function PortfolioShell() {
                       setLightboxSrc('/hotspotti-3.jpeg');
                     }}
                   >
-                    <img src="/hotspotti-3.jpeg" alt="Hotspotti profile and favorites." />
+                    <img
+                      src="/hotspotti-3.jpeg"
+                      alt="Hotspotti profile and favorites."
+                    />
                   </button>
-                  <figcaption>Saved hotspots and personalization flow.</figcaption>
+                  <figcaption>
+                    Saved hotspots and personalization flow.
+                  </figcaption>
                 </figure>
               </div>
               <h3>Core features</h3>
               <ul>
-                <li>Mapbox-backed exploration with clustered points and distance filtering.</li>
-                <li>Location-aware discovery with realtime proximity updates.</li>
-                <li>Personalized recommendations driven by user preferences and history.</li>
-                <li>Secure auth flow with tokenized sessions and protected storage.</li>
-                <li>Cross-platform UI with smooth transitions and gesture-friendly navigation.</li>
+                <li>
+                  Mapbox-backed exploration with clustered points and distance
+                  filtering.
+                </li>
+                <li>
+                  Location-aware discovery with realtime proximity updates.
+                </li>
+                <li>
+                  Personalized recommendations driven by user preferences and
+                  history.
+                </li>
+                <li>
+                  Secure auth flow with tokenized sessions and protected
+                  storage.
+                </li>
+                <li>
+                  Cross-platform UI with smooth transitions and gesture-friendly
+                  navigation.
+                </li>
               </ul>
               <h3>Technical stack</h3>
               <ul>
@@ -904,10 +1066,10 @@ export function PortfolioShell() {
               <span className="kicker">Project</span>
               <h1 className="doc-title">AI Trading Audit Platform</h1>
               <p className="doc-subtitle">
-                A production-grade audit and orchestration stack for AI-assisted trading
-                recommendations. It enforces deterministic policy gates, emits append-only audit
-                events (with optional hash chaining), and propagates trace IDs for end-to-end
-                compliance review.
+                A production-grade audit and orchestration stack for AI-assisted
+                trading recommendations. It enforces deterministic policy gates,
+                emits append-only audit events (with optional hash chaining),
+                and propagates trace IDs for end-to-end compliance review.
               </p>
               <TLDR
                 items={[
@@ -982,23 +1144,37 @@ flowchart TB
               />
               <h3>Key capabilities</h3>
               <ul>
-                <li>Append-only audit logging with optional tamper-evident hash chain.</li>
+                <li>
+                  Append-only audit logging with optional tamper-evident hash
+                  chain.
+                </li>
                 <li>End-to-end trace propagation for compliance review.</li>
-                <li>Strict separation between policy enforcement and advisory output.</li>
+                <li>
+                  Strict separation between policy enforcement and advisory
+                  output.
+                </li>
                 <li>Fail-closed behavior when audit logging is unavailable.</li>
               </ul>
               <h3>Core services</h3>
               <ul>
-                <li>Orchestrator (FastAPI + Pydantic) for request validation and policy gates.</li>
-                <li>Audit MCP (FastAPI + SQLite) for immutable event storage.</li>
-                <li>Shared schemas for trade requests, responses, and audit events.</li>
+                <li>
+                  Orchestrator (FastAPI + Pydantic) for request validation and
+                  policy gates.
+                </li>
+                <li>
+                  Audit MCP (FastAPI + SQLite) for immutable event storage.
+                </li>
+                <li>
+                  Shared schemas for trade requests, responses, and audit
+                  events.
+                </li>
               </ul>
             </section>
           ),
         },
       ],
     }),
-    [setLightboxSrc, setLightboxSvg]
+    [setLightboxSrc, setLightboxSvg],
   );
   const navRef = useRef<HTMLDivElement | null>(null);
   const activeProjectRef = useRef<HTMLAnchorElement | null>(null);
@@ -1013,16 +1189,20 @@ flowchart TB
   }, [activeProject, projectSections, projectViews]);
   const dossierIds = useMemo(() => projects.map((project) => project.id), []);
   const activeSection = useMemo(
-    () => activeSections.find((section) => section.id === activeId) ?? activeSections[0],
-    [activeId, activeSections]
+    () =>
+      activeSections.find((section) => section.id === activeId) ??
+      activeSections[0],
+    [activeId, activeSections],
   );
 
   useEffect(() => {
     const warmRoutes = () => {
       const dossierRoutes = (projectSections.hvacops ?? []).map((section) =>
-        getPortfolioPath('hvacops', section.id)
+        getPortfolioPath('hvacops', section.id),
       );
-      const projectRoutes = uiProjects.map((project) => getPortfolioPath(project.id, project.id));
+      const projectRoutes = uiProjects.map((project) =>
+        getPortfolioPath(project.id, project.id),
+      );
       ['/', ...dossierRoutes, ...projectRoutes].forEach((route) => {
         router.prefetch(route);
       });
@@ -1130,7 +1310,11 @@ flowchart TB
 
   useLayoutEffect(() => {
     const updateConnector = () => {
-      if (!navRef.current || !activeProjectRef.current || !activeLabelRef.current) {
+      if (
+        !navRef.current ||
+        !activeProjectRef.current ||
+        !activeLabelRef.current
+      ) {
         setConnectorPath('');
         return;
       }
@@ -1158,99 +1342,108 @@ flowchart TB
     return () => window.removeEventListener('resize', updateConnector);
   }, [activeProject, activeId, dossierIds]);
 
-
   return (
     <main className="single-shell">
       <div className="nav-pane">
-      <aside className="nav single-nav" ref={navRef}>
-        <h2>Nathan Schrader</h2>
-        <div className="nav-group">
-          <Link
-            href={getProjectHref('main')}
-            prefetch
-            scroll={false}
-            onClick={() => beginNavigation(getProjectHref('main'))}
-            className={activeProject === 'main' ? 'active' : ''}
-          >
-            About
-          </Link>
-        </div>
-        <div className="nav-divider nav-divider-subtle" />
-        <div className="nav-group">
-          <div className="nav-label">Projects</div>
-          {uiProjects.map((project) => (
+        <aside className="nav single-nav" ref={navRef}>
+          <h2>Nathan Schrader</h2>
+          <div className="nav-group">
             <Link
-              key={project.id}
-              href={getProjectHref(project.id)}
+              href={getProjectHref('main')}
               prefetch
               scroll={false}
-              onClick={() => beginNavigation(getProjectHref(project.id))}
-              className={activeProject === project.id ? 'active' : ''}
+              onClick={() => beginNavigation(getProjectHref('main'))}
+              className={activeProject === 'main' ? 'active' : ''}
             >
-              {project.label}
+              About
             </Link>
-          ))}
-        </div>
-        <div className="nav-divider nav-divider-subtle" />
-        <div className="nav-group">
-          <div className="nav-label">Architecture Dossiers</div>
-          {projects.map((project) => (
-            <Link
-              key={project.id}
-              href={getProjectHref(project.id)}
-              prefetch
-              scroll={false}
-              onClick={() => beginNavigation(getProjectHref(project.id))}
-              className={activeProject === project.id ? 'active' : ''}
-              ref={activeProject === project.id ? activeProjectRef : null}
-            >
-              {project.label}
-            </Link>
-          ))}
-        </div>
-        {dossierIds.includes(activeProject) && (
-          <div className="nav-divider nav-divider-subtle nav-divider-contents" />
-        )}
-        {dossierIds.includes(activeProject) && (
-          <div className="nav-group contents-group">
-            {activeSections.map((section) => (
+          </div>
+          <div className="nav-divider nav-divider-subtle" />
+          <div className="nav-group">
+            <div className="nav-label">Projects</div>
+            {uiProjects.map((project) => (
               <Link
-                key={section.id}
-                href={getPortfolioPath(activeProject, section.id)}
+                key={project.id}
+                href={getProjectHref(project.id)}
                 prefetch
                 scroll={false}
-                onClick={() => beginNavigation(getPortfolioPath(activeProject, section.id))}
-                className={activeId === section.id ? 'active' : ''}
-                ref={activeId === section.id ? activeLabelRef : null}
+                onClick={() => beginNavigation(getProjectHref(project.id))}
+                className={activeProject === project.id ? 'active' : ''}
               >
-                {section.label}
+                {project.label}
               </Link>
             ))}
           </div>
-        )}
-        <div className="nav-divider" />
-        <div className="nav-group">
-          <div className="nav-label">Find Me</div>
-          <a
-            href="https://www.linkedin.com/in/nateinsupport/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
-          <a href="https://github.com/schradermade" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a href="https://postman.com/nateinsupport" target="_blank" rel="noreferrer">
-            Postman
-          </a>
-        </div>
-        {connectorPath ? (
-          <svg className="nav-connector-svg" aria-hidden="true">
-            <path d={connectorPath} />
-          </svg>
-        ) : null}
-      </aside>
+          <div className="nav-divider nav-divider-subtle" />
+          <div className="nav-group">
+            <div className="nav-label">Architecture Dossiers</div>
+            {projects.map((project) => (
+              <Link
+                key={project.id}
+                href={getProjectHref(project.id)}
+                prefetch
+                scroll={false}
+                onClick={() => beginNavigation(getProjectHref(project.id))}
+                className={activeProject === project.id ? 'active' : ''}
+                ref={activeProject === project.id ? activeProjectRef : null}
+              >
+                {project.label}
+              </Link>
+            ))}
+          </div>
+          {dossierIds.includes(activeProject) && (
+            <div className="nav-divider nav-divider-subtle nav-divider-contents" />
+          )}
+          {dossierIds.includes(activeProject) && (
+            <div className="nav-group contents-group">
+              {activeSections.map((section) => (
+                <Link
+                  key={section.id}
+                  href={getPortfolioPath(activeProject, section.id)}
+                  prefetch
+                  scroll={false}
+                  onClick={() =>
+                    beginNavigation(getPortfolioPath(activeProject, section.id))
+                  }
+                  className={activeId === section.id ? 'active' : ''}
+                  ref={activeId === section.id ? activeLabelRef : null}
+                >
+                  {section.label}
+                </Link>
+              ))}
+            </div>
+          )}
+          <div className="nav-divider" />
+          <div className="nav-group">
+            <div className="nav-label">Find Me</div>
+            <a
+              href="https://www.linkedin.com/in/nateinsupport/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/schradermade"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://postman.com/nateinsupport"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Postman
+            </a>
+          </div>
+          {connectorPath ? (
+            <svg className="nav-connector-svg" aria-hidden="true">
+              <path d={connectorPath} />
+            </svg>
+          ) : null}
+        </aside>
       </div>
       <div className="content-pane">
         <div className="doc-content">{activeSection.content}</div>
@@ -1271,21 +1464,27 @@ flowchart TB
         <button
           type="button"
           className={mobilePanel === 'projects' ? 'active' : ''}
-          onClick={() => setMobilePanel(mobilePanel === 'projects' ? null : 'projects')}
+          onClick={() =>
+            setMobilePanel(mobilePanel === 'projects' ? null : 'projects')
+          }
         >
           Projects
         </button>
         <button
           type="button"
           className={mobilePanel === 'dossiers' ? 'active' : ''}
-          onClick={() => setMobilePanel(mobilePanel === 'dossiers' ? null : 'dossiers')}
+          onClick={() =>
+            setMobilePanel(mobilePanel === 'dossiers' ? null : 'dossiers')
+          }
         >
           Dossier
         </button>
         <button
           type="button"
           className={mobilePanel === 'links' ? 'active' : ''}
-          onClick={() => setMobilePanel(mobilePanel === 'links' ? null : 'links')}
+          onClick={() =>
+            setMobilePanel(mobilePanel === 'links' ? null : 'links')
+          }
         >
           Find Me
         </button>
@@ -1297,15 +1496,18 @@ flowchart TB
           aria-modal="true"
           onClick={() => setMobilePanel(null)}
         >
-          <div className="mobile-sheet-card" onClick={(event) => event.stopPropagation()}>
+          <div
+            className="mobile-sheet-card"
+            onClick={(event) => event.stopPropagation()}
+          >
             <div className="mobile-sheet-handle" aria-hidden="true" />
             <div className="mobile-sheet-header">
               <strong>
                 {mobilePanel === 'projects'
                   ? 'Projects'
                   : mobilePanel === 'dossiers'
-                  ? 'HVACOps.ai Dossier'
-                  : 'Find Me'}
+                    ? 'HVACOps.ai Dossier'
+                    : 'Find Me'}
               </strong>
               <button type="button" onClick={() => setMobilePanel(null)}>
                 Close
@@ -1353,7 +1555,9 @@ flowchart TB
                       scroll={false}
                       className={activeId === section.id ? 'active' : ''}
                       onClick={() => {
-                        beginNavigation(getPortfolioPath('hvacops', section.id));
+                        beginNavigation(
+                          getPortfolioPath('hvacops', section.id),
+                        );
                         setMobilePanel(null);
                       }}
                     >
@@ -1372,10 +1576,18 @@ flowchart TB
                 >
                   LinkedIn
                 </a>
-                <a href="https://github.com/schradermade" target="_blank" rel="noreferrer">
+                <a
+                  href="https://github.com/schradermade"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   GitHub
                 </a>
-                <a href="https://postman.com/nateinsupport" target="_blank" rel="noreferrer">
+                <a
+                  href="https://postman.com/nateinsupport"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Postman
                 </a>
               </div>
@@ -1413,7 +1625,7 @@ flowchart TB
                 />
               )}
             </div>,
-            document.body
+            document.body,
           )
         : null}
       {isNavigating ? (
